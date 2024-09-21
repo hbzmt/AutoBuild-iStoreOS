@@ -12,6 +12,11 @@
 
 # 修改openwrt登陆地址,把下面的 10.0.0.1 修改成你想要的就可以了
 sed -i 's/192.168.1.1/192.168.0.2/g' package/base-files/files/bin/config_generate
+# 修改 子网掩码
+sed -i 's/255.255.255.0/255.255.255.0/g' package/base-files/files/bin/config_generate
+
+# ttyd 自动登录
+sed -i "s?/bin/login?/usr/libexec/login.sh?g" ${GITHUB_WORKSPACE}/openwrt/package/feeds/packages/ttyd/files/ttyd.config
 
 # 修改主机名字，把 iStore OS 修改你喜欢的就行（不能纯数字或者使用中文）
 sed -i 's/OpenWrt/iStoreOS/g' package/base-files/files/bin/config_generate
@@ -32,13 +37,13 @@ function git_sparse_clone() {
 }
 
 # 添加额外插件
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+#git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
 git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-adguardhome
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-openclash
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-aliddns
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-adguardhome
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-openclash
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-aliddns
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-filebrowser filebrowser
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-jellyfin luci-lib-taskd
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-jellyfin luci-lib-taskd
 
 # 加入OpenClash核心
 chmod -R a+x $GITHUB_WORKSPACE/preset-clash-core.sh
@@ -64,32 +69,32 @@ CONFIG_GRUB_IMAGES=y
 CONFIG_VMDK_IMAGES=y
 
 # openclash
-CONFIG_PACKAGE_luci-app-openclash=y
+#CONFIG_PACKAGE_luci-app-openclash=y
 
 # adguardhome
-CONFIG_PACKAGE_luci-app-adguardhome=y
+#CONFIG_PACKAGE_luci-app-adguardhome=y
 
 # mosdns
 #CONFIG_PACKAGE_luci-app-mosdns=y
 
 # pushbot
-CONFIG_PACKAGE_luci-app-pushbot=y
+#CONFIG_PACKAGE_luci-app-pushbot=y
 
 # Jellyfin
-CONFIG_PACKAGE_luci-app-jellyfin=y
+#CONFIG_PACKAGE_luci-app-jellyfin=y
 
 # qbittorrent
-CONFIG_PACKAGE_luci-app-qbittorrent=y
+#CONFIG_PACKAGE_luci-app-qbittorrent=y
 
 # transmission
-CONFIG_PACKAGE_luci-app-transmission=y
-CONFIG_PACKAGE_transmission-web-control=y
+#CONFIG_PACKAGE_luci-app-transmission=y
+#CONFIG_PACKAGE_transmission-web-control=y
 
 # uhttpd
 #CONFIG_PACKAGE_luci-app-uhttpd=y
 
 # 阿里DDNS
-CONFIG_PACKAGE_luci-app-aliddns=y
+#CONFIG_PACKAGE_luci-app-aliddns=y
 
 # filebrowser
 CONFIG_PACKAGE_luci-app-filebrowser=y
