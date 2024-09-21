@@ -45,6 +45,13 @@ git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-filebrowser filebrowser
 #git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-jellyfin luci-lib-taskd
 
+# passwall
+svn export https://github.com/hbzmt/openwrt-packages/tree/master/luci-app-passwall package/luci-app-passwall
+
+# smartdns
+svn export https://github.com/hbzmt/openwrt-packages/tree/master/smartdns package/smartdns
+svn export https://github.com/hbzmt/openwrt-packages/tree/master/luci-app-smartdns package/luci-app-smartdns
+
 # 加入OpenClash核心
 chmod -R a+x $GITHUB_WORKSPACE/preset-clash-core.sh
 $GITHUB_WORKSPACE/preset-clash-core.sh
@@ -67,6 +74,12 @@ echo "
 # 额外组件
 CONFIG_GRUB_IMAGES=y
 CONFIG_VMDK_IMAGES=y
+
+# passwall
+CONFIG_PACKAGE_luci-app-passwall=y
+
+# smartdns
+CONFIG_PACKAGE_luci-app-smartdns=y
 
 # openclash
 #CONFIG_PACKAGE_luci-app-openclash=y
